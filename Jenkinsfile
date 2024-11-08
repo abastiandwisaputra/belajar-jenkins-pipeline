@@ -7,6 +7,11 @@ pipeline{
     stages {
         stage("Build") {
             steps {
+                script {
+                    for (int i = 0; i < 10; i++) {
+                        echo ("Script ${i}")
+                    }
+                }
                 echo("Start Build")
                 sh("./mvnw clean compile test-compile")
                 echo("Finish Build")
@@ -21,10 +26,9 @@ pipeline{
         }
         stage("Deploy") {
             steps {
-                echo("Hello Deploy 1")
-                sleep(5)
-                echo("Hello Deploy 2")
-                echo("Hello Deploy 3")
+                echo("Start Deploy")
+                sh("./mvnw deploy")
+                echo("Finish Deploy")
             }
         }
     }
