@@ -7,12 +7,34 @@ pipeline{
         WEB = "https://programmerzamannow.com"
     }
 
+    parameters {
+        string(name: "NAME", defaultValue: "Guest", description: "What is your name")
+        text(name: "DESCRIPTION", defaultValue: "Guest", description: "Tell me about you")
+        booleanParam(name: "DEPLOY", defaultValue: false, description: "Need to Deploy?")
+        choice(name: "SOCIAL_MEDIA", choices: ['Instagram', 'Facebook', 'Twitter'], description: "Which Social Media")
+        password(name: "SECRET", defaultValue: "", description: "Encrypt Key")
+    }
+
     options {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
     }
 
     stages {
+        stage("Parameter") {
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
+            steps {
+                echo "Hello ${params.NAME}!"
+                echo "You description ${params.DESCRIPTION}!"
+                echo "You social media is ${params.SOCIAL_MEDIA} user!"
+                echo "Need to deplot : ${params.DEPLOY} to deploy!"
+                echo "Your secret is ${params.SECRET}"
+            }
+        }
         stage("Prepare") {
                 environment {
                     APP = credentials("eko_rahasia")
