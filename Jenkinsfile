@@ -31,7 +31,7 @@ pipeline{
                 echo "Hello ${params.NAME}!"
                 echo "You description ${params.DESCRIPTION}!"
                 echo "You social media is ${params.SOCIAL_MEDIA} user!"
-                echo "Need to deplot : ${params.DEPLOY} to deploy!"
+                echo "Need to deploy : ${params.DEPLOY} to deploy!"
                 echo "Your secret is ${params.SECRET}"
             }
         }
