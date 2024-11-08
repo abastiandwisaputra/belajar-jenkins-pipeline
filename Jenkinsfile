@@ -7,6 +7,11 @@ pipeline{
         WEB = "https://programmerzamannow.com"
     }
 
+    options {
+        disabledConcurrentsBuilds()
+        timeout(time: 10, unit: 'MINUTES')
+    }
+
     stages {
         stage("Prepare") {
                 environment {
